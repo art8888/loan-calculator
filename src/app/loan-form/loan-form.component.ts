@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+
 import { ValidationService } from '../services/validation.service';
+import { ApiService } from '../services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loan-form',
@@ -11,11 +14,13 @@ export class LoanFormComponent implements OnInit {
 
   makes?: any[];
   loanForm: FormGroup;
-  submited = false;
+  submited:boolean = false;
+  result:(Observable<any> | string);
 
   constructor(
     private fb: FormBuilder,
-    private customValidator: ValidationService
+    private customValidator: ValidationService,
+    private api: ApiService,
   ) { }
 
   ngOnInit(): void {
@@ -35,9 +40,12 @@ export class LoanFormComponent implements OnInit {
   onSubmit() {
     this.submited = true;
 
+    if (this.loanForm.invalid) //on error
+      return;
 
-    alert("success");
-
+    if(this.loanForm.valid) 
+      this.result = this.api.postRequest(this.loanForm);
+      console.log(this.result);
   }
 
   onReset() {
