@@ -12,7 +12,7 @@ export class ApiService {
   apiUrl: string = 'https://homework.fdp.workers.dev/';
   httpOptions = {
     headers: new HttpHeaders({
-      'X-API-KEY': 'swb-222222"'
+      'X-API-KEY': '<key>>'
     })
   };
 
