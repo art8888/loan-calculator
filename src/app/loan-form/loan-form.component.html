@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row">
+        <div class="col-m-8  mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <H1>Loan Form Calculator</H1>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3 row">
+                            <label for="monthlyIncome" class="col-sm-4 col-form-label">Monthly Income</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" formControlName="monthlyIncome" min="50000" />
+                                <span class="text-danger" *ngIf="(loanFormControl.monthlyIncome.touched || submited) && loanFormControl.monthlyIncome.errors?.required">
+                                    Monthly Income required
+                                </span>
+                                <span class="text-danger" *ngIf="loanFormControl.monthlyIncome.touched && loanFormControl.monthlyIncome.errors?.min">
+                                    Min value: 50000
+                                </span> 
+                                <span class="text-danger" *ngIf="loanFormControl.monthlyIncome.touched && loanFormControl.monthlyIncome.errors?.pattern">
+                                    Incorrect number format
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="requestedAmount" class="col-sm-4 col-form-label">Requested Amount</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" formControlName="requestedAmount" min="20000000" />
+                                <span class="text-danger" *ngIf="(loanFormControl.requestedAmount.touched || submited) && loanFormControl.requestedAmount.errors?.required">
+                                    Request amount required
+                                </span>
+                                <span class="text-danger" *ngIf="loanFormControl.requestedAmount.touched && loanFormControl.requestedAmount.errors?.min">
+                                    Min value: 20000000
+                                </span> 
+                                <span class="text-danger" *ngIf="loanFormControl.requestedAmount.touched && loanFormControl.requestedAmount.errors?.pattern">
+                                    Incorrect number format
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label loan="loanTerm" class="col-sm-4 col-form-label">Loan Term (in months)</label>
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control" formControlName="loanTerm" min="36" max="360" />
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-danger"
+                                *ngIf="(loanFormControl.loanTerm.touched || submited) && loanFormControl.loanTerm.errors?.required">
+                                Loan term required
+                                </span>
+                                <span class="text-danger" *ngIf="loanFormControl.loanTerm.touched && loanFormControl.loanTerm.errors?.pattern">
+                                    Only positive number (w/o comma)
+                                </span>
+                                <span class="text-danger" *ngIf="loanFormControl.loanTerm.touched && loanFormControl.loanTerm.errors?.min">
+                                    Minimum: 36 months
+                                </span>
+                                <span class="text-danger" *ngIf="loanFormControl.loanTerm.touched && loanFormControl.loanTerm.errors?.max">
+                                    Minimum: 30 years / 360 months
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="childrens" class="col-sm-4 col-form-label">Children</label>
+                            <div class="col-sm-8">
+                                <select formControlName="childrens" class="form-control">
+                                    <option value="none">NONE</option>
+                                    <option value="single">SINGLE</option>
+                                    <option value="multiple">MULTIPLE</option>
+                                </select>
+                                <span class="text-danger"
+                                *ngIf="(loanFormControl.childrens.touched || submited) && loanFormControl.childrens.errors?.required">
+                                Childrens required
+                                </span>                            
+                                <span class="text-danger"
+                                *ngIf="loanFormControl.childrens.touched && loanFormControl.childrens.errors?.incorrectSelection">
+                                    Incorrect selection
+                                </span>    
+                            </div>                                
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="cooaplicants" class="col-sm-4 col-form-label">Co-applicant</label>
+                            <div class="col-sm-8">
+                                <select formControlName="cooaplicants" class="form-control">
+                                    <option value="none">NONE</option>
+                                    <option value="single-borrower">SINGLE_BORROWER</option>
+                                    <option value="multiple-borrowers">MULTIPLE_BORROWERS</option>
+                                </select>
+                                <span class="text-danger"
+                                *ngIf="(loanFormControl.cooaplicants.touched || submited) && loanFormControl.cooaplicants.errors?.required">
+                                Co-oaplicants required
+                                </span>       
+                                <span class="text-danger"
+                                *ngIf="loanFormControl.cooaplicants.touched && loanFormControl.cooaplicants.errors?.incorrectSelection">
+                                    Incorrect selection
+                                </span>           
+                            </div>             
+                        </div>     
+                        <div class="mb-3 row">
+                            <div class="text-center">
+                                <button class="btn btn-primary mr-1">Submit</button>
+                                <button class="btn btn-secondary" type="reset" click="onReset()">Cancel</button>
+                            </div>
+                        </div>                   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
