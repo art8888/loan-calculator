@@ -15,7 +15,7 @@ export class LoanFormComponent implements OnInit {
   makes?: any[];
   loanForm: FormGroup;
   submited:boolean = false;
-  result:(Observable<any> | string);
+  public result: Observable<any>;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +31,7 @@ export class LoanFormComponent implements OnInit {
       childrens: ['', [Validators.required], this.customValidator.validateSelect.bind(this.customValidator)],
       cooaplicants: ['', [Validators.required], this.customValidator.validateSelect.bind(this.customValidator)],
     });
+ 
   }
 
   
