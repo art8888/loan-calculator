@@ -6,11 +6,11 @@
                     <H1>Loan Form Calculator</H1>
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="loanForm" id="loanForm" (ngSubmit)="onSubmit()">
                         <div class="mb-3 row">
                             <label for="monthlyIncome" class="col-sm-4 col-form-label">Monthly Income</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" formControlName="monthlyIncome" min="50000"  />
+                                <input type="number" class="form-control" formControlName="monthlyIncome" min="50000"/>
                                 <span class="text-danger" *ngIf="(loanFormControl.monthlyIncome.touched || submited) && loanFormControl.monthlyIncome.errors?.required">
                                     Monthly Income required
                                 </span>
@@ -25,7 +25,7 @@
                         <div class="mb-3 row">
                             <label for="requestedAmount" class="col-sm-4 col-form-label">Requested Amount</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" formControlName="requestedAmount" min="20000000" value="20000000" />
+                                <input type="number" class="form-control" formControlName="requestedAmount" min="20000000" value="20000000"/>
                                 <span class="text-danger" *ngIf="(loanFormControl.requestedAmount.touched || submited) && loanFormControl.requestedAmount.errors?.required">
                                     Request amount required
                                 </span>
@@ -40,7 +40,7 @@
                         <div class="mb-3 row">
                             <label loan="loanTerm" class="col-sm-4 col-form-label">Loan Term (in months)</label>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" formControlName="loanTerm" min="36" max="360" value="36" />
+                                <input type="number" class="form-control" formControlName="loanTerm" min="36" max="360" [value]="36"/>
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-danger"
@@ -62,7 +62,7 @@
                             <label for="childrens" class="col-sm-4 col-form-label">Children</label>
                             <div class="col-sm-8">
                                 <select formControlName="childrens" class="form-control">
-                                    <option value="none" selected>NONE</option>
+                                    <option value="none">NONE</option>
                                     <option value="single">SINGLE</option>
                                     <option value="multiple">MULTIPLE</option>
                                 </select>
@@ -80,7 +80,7 @@
                             <label for="cooaplicants" class="col-sm-4 col-form-label">Co-applicant</label>
                             <div class="col-sm-8">
                                 <select formControlName="cooaplicants" class="form-control">
-                                    <option value="none" selected>NONE</option>
+                                    <option value="none">NONE</option>
                                     <option value="single-borrower">SINGLE_BORROWER</option>
                                     <option value="multiple-borrowers">MULTIPLE_BORROWERS</option>
                                 </select>

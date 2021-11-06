@@ -9,25 +9,33 @@ import { catchError } from 'rxjs/operators';
 
 export class ApiService {
 
-  apiUrl: string = 'https://homework.fdp.workers.dev/';
+  apiUrl: string = '<url>';
   httpOptions = {
     headers: new HttpHeaders({
-      'X-API-KEY': '<key>>'
+      'Content-Type':  'application/json',
+      'X-API-KEY': '<XXX-XXXXXX>'
     })
   };
 
   constructor( private http: HttpClient, ) { }
 
   postRequest(formData): Observable<any> {
-    return this.http.post<any>(this.apiUrl, formData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<any>(this.apiUrl, formData, this.httpOptions).pipe(catchError(this.errorHandler));
   }
 
-  private handleError(error: (HttpErrorResponse | any)) {
-    if(error.error instanceof ErrorEvent) {
-      return error.error.message;
+  errorHandler(error: HttpErrorResponse) {
+    let errorMessage = '';
+    
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+      console.log('Error: ',errorMessage);
     } else {
-      return error.status;
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${JSON.stringify(error.error)}`;
+      console.log('err',errorMessage);
     }
-    return throwError('Something has wrong; Api is not working!');
+    return throwError(errorMessage);
   }
+
 }

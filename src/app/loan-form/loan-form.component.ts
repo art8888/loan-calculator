@@ -11,6 +11,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./loan-form.component.scss']
 })
 export class LoanFormComponent implements OnInit {
+  /* 
+    monthlyIncome:number;
+    requestedAmount:number;
+    loanTerm:number; 
+  */
 
   makes?: any[];
   loanForm: FormGroup;
@@ -21,7 +26,13 @@ export class LoanFormComponent implements OnInit {
     private fb: FormBuilder,
     private customValidator: ValidationService,
     private api: ApiService,
-  ) { }
+  ) {
+    /*  --- set default values
+      this.monthlyIncome = 50000;
+      this.requestedAmount = 20000000;
+      this.loanTerm = 36; 
+    */
+   }
 
   ngOnInit(): void {
     this.loanForm = this.fb.group({
@@ -40,11 +51,11 @@ export class LoanFormComponent implements OnInit {
 
   onSubmit() {
     this.submited = true;
-
     if (this.loanForm.invalid) //on error
       return;
 
     if(this.loanForm.valid) 
+    
       this.result = this.api.postRequest(this.loanForm);
       console.log(this.result);
   }
